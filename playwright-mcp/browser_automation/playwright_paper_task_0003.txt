@@ -1,0 +1,5 @@
+Task Number: 22
+Task Name: playwright_paper_task_0003
+
+PROMPT:
+I am a first-year PhD student focusing on GUI Grounding. I want to learn about benchmarks in this area, such as OSWorld, ScreenSpot-Pro, and UI-Vision. Please help me find the arXiv IDs of these three works from https://arxiv.org/. Remember to close the browser when you finish the task.

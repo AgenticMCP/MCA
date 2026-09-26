@@ -1,0 +1,11 @@
+Hey, I'm putting together a quick demo for a teammate on how Postgres handles JSONB — specifically the jsonb operators (->>, containment, and how WHERE clauses on extracted fields behave. Could you set me up a fresh schema called agenticmcpe_bench_jsondocs_quarantine and inside it build a table called shipment_logs with an id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY and a single payload jsonb column. Then insert exactly five rows with these literal JSON documents, in this order:
+
+1. {"event_type":"dispatch","origin":"depot-east","carrier":"fleet-x","status":"queued"}
+2. {"event_type":"dispatch","origin":"depot-west","carrier":"fleet-x","status":"queued"}
+3. {"event_type":"pickup","origin":"depot-east","carrier":"fleet-x","status":"in_transit"}
+4. {"event_type":"delay","origin":"depot-east","carrier":"fleet-x","status":"delayed","delay_minutes":42}
+5. {"event_type":"delivery","origin":"depot-west","carrier":"fleet-x","status":"delivered"}
+
+After the inserts, please run four labeled reads against shipment_logs (everything inside one schema-qualified SQL statement apiece): a baseline SELECT projecting id and payload->>'event_type' AS event_type ordered by id so the doc shape is visible; a filtered SELECT with WHERE payload->>'status' = 'delayed' projecting id and payload->>'delay_minutes' AS delay_minutes so the jsonb->> filter is exercised; a grouped COUNT(*) SELECT grouping by payload->>'origin' AS origin and counting rows, ordered by origin; and a scalar COUNT(*) SELECT filtered to payload->>'carrier' = 'fleet-x' so I have a single integer confirmation.
+
+Then list the schema's objects so the table is on record, pull the detailed column/constraint metadata for shipment_logs so we can confirm the jsonb column and the identity PK, and finish with a connection-scope database health check. Every write should be schema-qualified so public stays untouched.

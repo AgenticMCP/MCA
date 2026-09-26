@@ -1,0 +1,13 @@
+{
+  "tool": "list_schemas",
+  "impl": [
+    {
+      "file": "src/postgres_mcp/server.py",
+      "func": "list_schemas",
+      "start_line": 91,
+      "end_line": 113,
+      "code": "async def list_schemas() -> ResponseType:\n    \"\"\"List all schemas in the database.\"\"\"\n    try:\n        sql_driver = await get_sql_driver()\n        rows = await sql_driver.execute_query(\n            \"\"\"\n            SELECT\n                schema_name,\n                schema_owner,\n                CASE\n                    WHEN schema_name LIKE 'pg_%' THEN 'System Schema'\n                    WHEN schema_name = 'information_schema' THEN 'System Information Schema'\n                    ELSE 'User Schema'\n                END as schema_type\n            FROM information_schema.schemata\n            ORDER BY schema_type, schema_name\n            \"\"\"\n        )\n        schemas = [row.cells for row in rows] if rows else []\n        return format_text_response(schemas)\n    except Exception as e:\n        logger.error(f\"Error listing schemas: {e}\")\n        return format_error_response(str(e))"
+    }
+  ],
+  "tests": []
+}

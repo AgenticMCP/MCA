@@ -1,0 +1,5 @@
+TOOL CATALOG (authoritative):
+{catalog}
+
+TASK:
+{task}

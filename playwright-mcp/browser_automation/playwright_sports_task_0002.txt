@@ -1,0 +1,5 @@
+Task Number: 29
+Task Name: playwright_sports_task_0002
+
+PROMPT:
+I am a big fan of Yueru Li in WNBA. Can you help me find PTS of her in 2024 season? You can find it with the offical website of WNBA (https://www.wnba.com/). She played for the Sparks. Remember to close the browser when you finish the task.

@@ -1,0 +1,5 @@
+Task Number: 1
+Task Name: playwright_booking_task_0001
+
+PROMPT:
+Help me find a one-way flight from Singapore to Beijing, 5 days from now (If now is 2025-07-07, then 5 days later is 2025-07-12). Find the flight on www.booking.com. I want to find the cheapest flight, direct flight, Economy, and I don't want to go to the Daxing airport. I only want to see the price, so as to determine whether I should fly to Beijing or not. Remember to close the browser after you finish the task.

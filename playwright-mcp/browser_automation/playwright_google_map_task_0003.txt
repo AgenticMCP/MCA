@@ -1,0 +1,5 @@
+Task Number: 7
+Task Name: playwright_google_map_task_0003
+
+PROMPT:
+I live in Paiza Sky Residence, Singapore. My friend lives in Symphony Suites, Yishun, Singapore. We want to find a meeting point between our two locations. Find a single 'cafe' (must be of type 'cafe') such that the estimated driving time from Paiza Sky Residence to the cafe is as close as possible to the walking time from Symphony Suites to the cafe. Use the website `https://www.google.com/maps` to find the cafe. Report the Name and Place ID of the cafe. Remember to close the browser after you finish the task.

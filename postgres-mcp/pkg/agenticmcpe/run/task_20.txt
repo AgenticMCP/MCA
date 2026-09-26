@@ -1,0 +1,20 @@
+Hey, I'm staging a tiny reporting slice end-to-end and want the whole life of it in one sitting on a fresh schema, so I can show a teammate the moves from create → seed → index → view → read → fix → re-read on a single dataset. Could you set up a fresh schema called `agenticmcpe_bench_gridwatch_audit` and inside it do all of the following, all schema-qualified so public stays untouched?
+
+1) Build a lookup table `facilities` with `id serial PRIMARY KEY` and `facility_name text`, and seed it with exactly these three rows: (1,'north-dc'), (2,'south-dc'), (3,'west-dc').
+2) Build a main table `grid_readings` with `id serial PRIMARY KEY`, `facility_id int` (with a REFERENCES to facilities(id) foreign key), `reading_on date`, `voltage_min numeric`, and `voltage_max numeric`, then seed it with exactly these five rows verbatim, in this order — note row id=2 is intentionally fat-fingered (voltage_max=99999 instead of 220):
+
+   - (1, 1, '2025-06-01', 215.0, 230.0)
+   - (2, 1, '2025-06-01', 210.0, 99999.0)
+   - (3, 2, '2025-06-01', 218.0, 232.0)
+   - (4, 3, '2025-06-01', 220.0, 235.0)
+   - (5, 3, '2025-06-02', 221.0, 236.0)
+
+3) Add a btree index `idx_grid_readings_facility_id` on `grid_readings(facility_id)` since the report below filters by that column, then run `ANALYZE grid_readings` so the planner has fresh stats.
+4) Create a view `v_facility_summary` inside the same schema that joins `grid_readings` to `facilities`, groups by `facility_name`, and returns `facility_name`, `ROUND(AVG(voltage_min), 2) AS avg_voltage_min`, `ROUND(AVG(voltage_max), 2) AS avg_voltage_max`, and `COUNT(*) AS reading_count`, ordered by `facility_name`.
+5) Run a labeled SELECT prefixed `-- summary_before` selecting every column from `v_facility_summary` so the initial aggregates (including the fat-fingered max on north-dc) are visible.
+6) Apply ONE `UPDATE grid_readings SET voltage_max = 220 WHERE id = 2` to correct the fat-fingered row.
+7) Run a labeled SELECT prefixed `-- summary_after` that returns the same columns from `v_facility_summary` so the corrected aggregates are visible side by side.
+8) List the objects in the new schema so both tables and the view are confirmed present, and pull the detailed column/constraint metadata for `grid_readings` so I can see the PK + FK + numeric columns are recorded.
+9) Finish with a connection-scope database health check so any planner / vacuum / long-tx warnings get surfaced before I sign off.
+
+Strict rule: every DDL and DML stays inside `agenticmcpe_bench_gridwatch_audit`. Please don't touch `public` or any other schema.

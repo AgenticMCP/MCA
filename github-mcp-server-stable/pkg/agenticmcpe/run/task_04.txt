@@ -1,0 +1,25 @@
+For this assignment, I would like you to establish a new project repository named ai-code-reviewer. Please begin by initializing the repository with three branches: feature-analysis, feature-integration, and main. You should include an initial README.md file in the main branch with the content "# AI Code Reviewer
+
+An intelligent code review assistant that analyzes code quality, detects potential bugs, and suggests improvements using machine learning techniques.". Next, please add code_analyzer.py in the feature-analysis branch with the content "# Code analysis module
+import ast
+
+class CodeAnalyzer:
+    def __init__(self, code):
+        self.code = code
+        self.tree = ast.parse(code)
+
+    def analyze(self):
+        # TODO: Implement analysis logic
+        pass". Additionally, create a .gitignore file in the main branch with the exact content: "# Python cache and virtual environments
+__pycache__/
+*.pyc
+*.py.class
+venv/
+*.env
+
+# Analysis results
+reports/
+logs/
+
+# Model checkpoints
+models/". Please copy train.py from bigcode-project's starcoder repository to the feature-integration branch. Finally, I would like you to create a pull request to merge feature-analysis into main with the title "Add initial code analysis module" and description "This PR implements the basic code analysis module using AST parsing for initial code quality assessment."

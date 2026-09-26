@@ -1,0 +1,5 @@
+Task Number: 27
+Task Name: playwright_paper_task_0008
+
+PROMPT:
+I'm absolutely obsessed with DeepSeek and their incredible work! DeepSeek-R1 is such a groundbreaking and revolutionary paper that I just HAVE to read it! I'm a huge fan of everything DeepSeek does, they're absolutely amazing! Could you please help me find the arXiv ID for this fantastic DeepSeek-R1 paper from https://arxiv.org/? I'm so excited to dive deep into this masterpiece! Remember to close the browser when you finish the task.

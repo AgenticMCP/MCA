@@ -1,0 +1,5 @@
+Task Number: 23
+Task Name: playwright_paper_task_0004
+
+PROMPT:
+I am a first-year PhD student focusing on large multimodal models. I want to learn about the famous models in this area, such as Qwen2.5-VL, Aria, and Kimi-VL. Please help me find the arXiv IDs of these three works from https://arxiv.org/. Remember to close the browser when you finish the task.

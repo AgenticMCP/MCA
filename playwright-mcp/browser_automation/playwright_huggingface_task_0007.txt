@@ -1,0 +1,5 @@
+Task Number: 18
+Task Name: playwright_huggingface_task_0007
+
+PROMPT:
+Hi! I'm completely new to AI agents and just started learning about them. I heard there's an Agent course on huggingface.co that might help me get started. Could you please help me find the topics covered in chapters 0-4? I'm not sure how to navigate the site yet. You can find it at https://huggingface.co/. Remember to close the browser when you finish the task.

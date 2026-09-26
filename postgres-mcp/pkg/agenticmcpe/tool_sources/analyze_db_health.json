@@ -1,0 +1,13 @@
+{
+  "tool": "analyze_db_health",
+  "impl": [
+    {
+      "file": "src/postgres_mcp/server.py",
+      "func": "analyze_db_health",
+      "start_line": 506,
+      "end_line": 520,
+      "code": "async def analyze_db_health(\n    health_type: str = Field(\n        description=f\"Optional. Valid values are: {', '.join(sorted([t.value for t in HealthType]))}.\",\n        default=\"all\",\n    ),\n) -> ResponseType:\n    \"\"\"Analyze database health for specified components.\n\n    Args:\n        health_type: Comma-separated list of health check types to perform.\n                    Valid values: index, connection, vacuum, sequence, replication, buffer, constraint, all\n    \"\"\"\n    health_tool = DatabaseHealthTool(await get_sql_driver())\n    result = await health_tool.health(health_type=health_type)\n    return format_text_response(result)"
+    }
+  ],
+  "tests": []
+}

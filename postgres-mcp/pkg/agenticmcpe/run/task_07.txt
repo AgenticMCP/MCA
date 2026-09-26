@@ -1,0 +1,11 @@
+Do me a read-only vacuum-stats review on this Postgres instance — I want to judge whether autovacuum is actually keeping up, no DDL or DML anywhere.
+
+Start by listing the schemas, then enumerate the objects inside pg_catalog so I can see the catalog views available, and pull the detailed column metadata for pg_stat_user_tables and pg_settings so I'm sure of the column shapes I'll be filtering against.
+
+Then run three labeled SELECTs:
+
+- one prefixed `-- per_table_vacuum_stats` returning schemaname, relname, n_live_tup, n_dead_tup, last_autovacuum::text AS last_autovacuum, last_autoanalyze::text AS last_autoanalyze from pg_stat_user_tables where schemaname NOT IN ('pg_catalog','information_schema') ordered by n_dead_tup DESC limit 10;
+- one prefixed `-- total_dead_tuples` returning the scalar SUM(n_dead_tup) under the same predicate (excluding pg_catalog and information_schema) so I have one instance-wide dead-tuple number on record;
+- one prefixed `-- autovacuum_settings_runtime` returning name and setting from pg_settings filtered to the bounded autovacuum-related set (autovacuum, autovacuum_vacuum_threshold, autovacuum_analyze_threshold, autovacuum_naptime, autovacuum_vacuum_scale_factor, autovacuum_max_workers) ordered by name.
+
+Finish with a connection-scope database health check so anything else worth flagging — planner issues, long transactions, buffer cache — gets surfaced. Pure inspection.

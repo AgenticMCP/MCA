@@ -1,0 +1,10 @@
+Hey, do me a read-only health audit on this Postgres instance — no DDL/DML anywhere. Start by listing the schemas, then enumerate the objects inside pg_catalog so I know what catalog views exist. Pull detailed column metadata for pg_stat_statements and pg_stat_user_tables so I can see the columns I'll be filtering against.
+
+Then run a handful of labeled SELECTs, all strictly system-catalog reads:
+
+- `-- runtime_identity` returning current_database(), current_user, and version() as a single row;
+- `-- top_queries_by_total_time` selecting calls, total_exec_time, mean_exec_time, query (truncated) from pg_stat_statements filtered to calls > 0, ordered by total_exec_time DESC, limited to 10;
+- `-- seq_vs_idx_scan_summary` returning schemaname, relname, seq_scan, idx_scan, n_live_tup, n_dead_tup from pg_stat_user_tables ordered by seq_scan DESC, limited to 10;
+- and `-- longest_transactions` returning pid, usename, state, xact_start, query_start, now() - xact_start AS xact_duration from pg_stat_activity WHERE xact_start IS NOT NULL ORDER BY xact_start LIMIT 10.
+
+Run the workload-wide index advisor over the recorded pg_stat_statements workload so I can see what it would add. Finish with a connection-scope database health check. Pure inspection.

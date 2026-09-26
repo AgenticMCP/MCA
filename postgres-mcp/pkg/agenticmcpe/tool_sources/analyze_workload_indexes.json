@@ -1,0 +1,13 @@
+{
+  "tool": "analyze_workload_indexes",
+  "impl": [
+    {
+      "file": "src/postgres_mcp/server.py",
+      "func": "analyze_workload_indexes",
+      "start_line": 438,
+      "end_line": 454,
+      "code": "async def analyze_workload_indexes(\n    max_index_size_mb: int = Field(description=\"Max index size in MB\", default=10000),\n    method: Literal[\"dta\", \"llm\"] = Field(description=\"Method to use for analysis\", default=\"dta\"),\n) -> ResponseType:\n    \"\"\"Analyze frequently executed queries in the database and recommend optimal indexes.\"\"\"\n    try:\n        sql_driver = await get_sql_driver()\n        if method == \"dta\":\n            index_tuning = DatabaseTuningAdvisor(sql_driver)\n        else:\n            index_tuning = LLMOptimizerTool(sql_driver)\n        dta_tool = TextPresentation(sql_driver, index_tuning)\n        result = await dta_tool.analyze_workload(max_index_size_mb=max_index_size_mb)\n        return format_text_response(result)\n    except Exception as e:\n        logger.error(f\"Error analyzing workload: {e}\")\n        return format_error_response(str(e))"
+    }
+  ],
+  "tests": []
+}

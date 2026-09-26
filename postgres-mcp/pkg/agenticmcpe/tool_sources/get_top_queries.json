@@ -1,0 +1,28 @@
+{
+  "tool": "get_top_queries",
+  "impl": [
+    {
+      "file": "src/postgres_mcp/server.py",
+      "func": "get_top_queries",
+      "start_line": 531,
+      "end_line": 554,
+      "code": "async def get_top_queries(\n    sort_by: str = Field(\n        description=\"Ranking criteria: 'total_time' for total execution time or 'mean_time' for mean execution time per call, or 'resources' \"\n        \"for resource-intensive queries\",\n        default=\"resources\",\n    ),\n    limit: int = Field(description=\"Number of queries to return when ranking based on mean_time or total_time\", default=10),\n) -> ResponseType:\n    try:\n        sql_driver = await get_sql_driver()\n        top_queries_tool = TopQueriesCalc(sql_driver=sql_driver)\n\n        if sort_by == \"resources\":\n            result = await top_queries_tool.get_top_resource_queries()\n            return format_text_response(result)\n        elif sort_by == \"mean_time\" or sort_by == \"total_time\":\n            # Map the sort_by values to what get_top_queries_by_time expects\n            result = await top_queries_tool.get_top_queries_by_time(limit=limit, sort_by=\"mean\" if sort_by == \"mean_time\" else \"total\")\n        else:\n            return format_error_response(\"Invalid sort criteria. Please use 'resources' or 'mean_time' or 'total_time'.\")\n        return format_text_response(result)\n    except Exception as e:\n        logger.error(f\"Error getting slow queries: {e}\")\n        return format_error_response(str(e))"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/integration/test_top_queries_integration.py",
+      "func": "test_get_top_queries_integration",
+      "start_line": 109,
+      "end_line": 147,
+      "code": "async def test_get_top_queries_integration(local_sql_driver):\n    \"\"\"\n    Integration test for get_top_queries with a real database.\n    \"\"\"\n    try:\n        await setup_test_data(local_sql_driver)\n\n        # Verify pg_stat_statements has captured our queries\n        pg_stats = await local_sql_driver.execute_query(\"SELECT query FROM pg_stat_statements WHERE query LIKE '%CROSS JOIN%' LIMIT 1\")\n        if not pg_stats or len(pg_stats) == 0:\n            pytest.skip(\"pg_stat_statements did not capture the CROSS JOIN query\")\n\n        # Create the TopQueriesCalc instance\n        calc = TopQueriesCalc(sql_driver=local_sql_driver)\n\n        # Get top queries by total execution time\n        total_result = await calc.get_top_queries_by_time(limit=10, sort_by=\"total\")\n\n        # Get top queries by mean execution time\n        mean_result = await calc.get_top_queries_by_time(limit=10, sort_by=\"mean\")\n\n        # Basic verification\n        assert \"slowest queries by total execution time\" in total_result\n        assert \"slowest queries by mean execution time\" in mean_result\n\n        # Log results for manual inspection\n        logger.info(f\"Top queries by total time: {total_result}\")\n        logger.info(f\"Top queries by mean time: {mean_result}\")\n\n        # Check for our specific test queries - at least one should be found\n        # since we run many different queries\n        has_cross_join = \"CROSS JOIN\" in total_result\n        has_value_gt_500 = \"value > 500\" in total_result\n        has_count = \"COUNT(*)\" in total_result\n\n        assert has_cross_join or has_value_gt_500 or has_count, \"None of our test queries appeared in the results\"\n\n    finally:\n        await cleanup_test_data(local_sql_driver)"
+    },
+    {
+      "file": "tests/integration/test_top_queries_integration.py",
+      "func": "test_extension_not_available",
+      "start_line": 151,
+      "end_line": 181,
+      "code": "async def test_extension_not_available(local_sql_driver):\n    \"\"\"Test behavior when pg_stat_statements extension is not available.\"\"\"\n    # Create the TopQueriesCalc instance\n    calc = TopQueriesCalc(sql_driver=local_sql_driver)\n\n    # Need to patch at the module level for proper mocking\n    with pytest.MonkeyPatch().context() as mp:\n        # Import the module we'll be monkeypatching\n        import postgres_mcp.sql.extension_utils\n        from postgres_mcp.sql.extension_utils import ExtensionStatus\n\n        # Define our mock function with the correct type signature\n        async def mock_check(*args, **kwargs):\n            return ExtensionStatus(\n                is_installed=False,\n                is_available=True,\n                name=PG_STAT_STATEMENTS,\n                message=\"Extension not installed\",\n                default_version=None,\n            )\n\n        # Replace the function with our mock\n        # We need to patch the actual function imported by TopQueriesCalc\n        mp.setattr(postgres_mcp.top_queries.top_queries_calc, \"check_extension\", mock_check)\n\n        # Run the test\n        result = await calc.get_top_queries_by_time()\n\n        # Check that we get installation instructions\n        assert \"not currently installed\" in result\n        assert \"CREATE EXTENSION\" in result"
+    }
+  ]
+}

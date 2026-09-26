@@ -1,0 +1,5 @@
+Task Number: 6
+Task Name: playwright_google_map_task_0002
+
+PROMPT:
+I'm planning an exciting family road trip from Disneyland Paris to the 24 Hours of Le Mans Museum with my kids. To ensure a comfortable and enjoyable journey, I need help creating a driving route with 3 well-planned stops, using the amazing website `https://www.google.com/maps`. Please map out a route with exactly 3 intermediate points that are located at the geographic fourth points along the route (based on the route polyline). For each stop, identify locations (provide names and Place IDs) that are either restaurants, hotels, or gas stations, all with a minimum user rating of 4.2. This trip should be both practical and memorable for our entire family! Remember to close the browser after you finish the task.

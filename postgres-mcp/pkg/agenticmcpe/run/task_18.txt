@@ -1,0 +1,18 @@
+Hey, I'm prototyping a small alerting slice and want a tidy temporal-series sandbox to play with. Could you set up a fresh schema called `agenticmcpe_bench_signalwave_pulse` and inside it create a table `signal_events` with these columns: `id serial primary key`, `source text`, `occurred_at timestamp`, `level text`, and `value_cents integer`.
+
+Please seed it with exactly these five rows verbatim, in this order:
+
+- '2025-03-27 09:15:00' / 'auth'     / 'info'  / 1200
+- '2025-03-28 14:42:00' / 'payments' / 'warn'  / 4500
+- '2025-03-29 08:03:00' / 'auth'     / 'error' / 0
+- '2025-03-30 19:27:00' / 'search'   / 'warn'  / 3300
+- '2025-03-31 11:55:00' / 'payments' / 'error' / 7800
+
+After the inserts, list the objects in the new schema so I can see `signal_events` is there, and pull the detailed column/constraint metadata for `signal_events` so I can confirm the shape (PK + types).
+
+Then run three labeled reads against `signal_events`, all filtering to the inclusive date window 2025-03-28 through 2025-03-31:
+- one prefixed `-- range_query` returning id, source, occurred_at::text as occurred_at, level, value_cents for every row in the window, ordered by occurred_at;
+- one prefixed `-- per_day_counts` returning date_trunc('day', occurred_at) as day_bucket and COUNT(*) as event_count over the window, ordered by day_bucket;
+- one prefixed `-- per_source_counts` returning source and COUNT(*) as event_count over the window, ordered by source.
+
+Finish with a connection-scope database health check. Every DDL and DML must stay strictly inside `agenticmcpe_bench_signalwave_pulse` — please don't touch `public` or any other schema.

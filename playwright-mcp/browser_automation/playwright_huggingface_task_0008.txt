@@ -1,0 +1,5 @@
+Task Number: 19
+Task Name: playwright_huggingface_task_0008
+
+PROMPT:
+As a researcher specializing in LLM safety, I am investigating the performance characteristics of Llama Prompt Guard models. Specifically, I need to examine the Llama Prompt Guard 2 (86M parameter version) performance metrics on the Direct Jailbreak Detection Evaluation benchmark, with particular focus on the Recall @ 1% FPR (English) metric. Could you assist me in locating this performance data on https://huggingface.co/? Please remember to close the browser upon task completion.

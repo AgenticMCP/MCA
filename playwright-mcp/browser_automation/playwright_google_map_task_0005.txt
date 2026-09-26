@@ -1,0 +1,5 @@
+Task Number: 9
+Task Name: playwright_google_map_task_0005
+
+PROMPT:
+My partner and I are from Spain and we're planning our romantic honeymoon trip to Indonesia. Help us plan an unforgettable road trip starting in 'Jakarta' and ending in 'Surabaya', and we'd love your help to make it perfect with the amazing website `https://www.google.com/maps`! For our romantic journey, we plan to drive through exactly 1 charming city between the start and end points. Could you please map out exactly 1 distinct driving route option for our honeymoon adventure? For this route, could you also identify 1 romantic rest stop within that intermediate city (a total of 1 rest stop per route) where we can enjoy some quality time together? We're really looking forward to creating beautiful memories on this fantastic honeymoon adventure! Remember to close the browser after you finish the task.

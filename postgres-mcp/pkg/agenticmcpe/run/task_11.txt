@@ -1,0 +1,22 @@
+Hey, I'm doing a quick dedup drill on a scratch table and want a tidy sandbox to show a teammate how Postgres handles duplicate business keys when there's NO unique constraint guarding the column. Could you set up a fresh schema called `agenticmcpe_bench_ledger_scrub` and inside it build a `transactions` table with `id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY`, `txn_ref text`, `account_id int`, `amount_cents int`, and `recorded_on date`. Don't put a UNIQUE constraint on `txn_ref` — the whole point of the exercise is to insert duplicates and then clean them up.
+
+Seed it with exactly these ten rows verbatim, in this order (note that two txn_refs each appear twice — those are the duplicates I want to scrub):
+
+- (default id, 'INV-100', 7,  1500, '2025-05-01')
+- (default id, 'INV-100', 7,  1500, '2025-05-01')
+- (default id, 'INV-200', 9,  3200, '2025-05-02')
+- (default id, 'INV-200', 9,  3200, '2025-05-02')
+- (default id, 'INV-300', 3,   800, '2025-05-03')
+- (default id, 'INV-400', 4,  2200, '2025-05-04')
+- (default id, 'INV-500', 5,  4750, '2025-05-05')
+- (default id, 'INV-500', 5,  4750, '2025-05-05')
+- (default id, 'INV-600', 2,   650, '2025-05-06')
+- (default id, 'INV-700', 8,  9900, '2025-05-07')
+
+After the inserts, please run a labeled SELECT prefixed `-- rows_before` that returns id, txn_ref, account_id, amount_cents, recorded_on from `transactions` ordered by id, so the raw seeded state (duplicates included) is on record. Then run a labeled SELECT prefixed `-- duplicate_groups` that returns txn_ref and COUNT(*) AS dup_count grouped by txn_ref, filtered to groups with COUNT(*) > 1, ordered by txn_ref, so the duplicate population is quantified before cleanup.
+
+Then run ONE `DELETE ... USING ...` statement that removes the duplicates in a single shot by keeping only the smallest `id` for each duplicated `txn_ref` (i.e. for any two rows that share a `txn_ref`, delete the one with the larger `id`).
+
+After the delete, run a labeled SELECT prefixed `-- duplicate_groups_after` returning the same grouped query as before (txn_ref, COUNT(*) AS dup_count, only groups with COUNT(*) > 1, ordered by txn_ref) so the duplicate population is shown to be empty. Then run a labeled SELECT prefixed `-- survivors` returning id, txn_ref, account_id, amount_cents, recorded_on from `transactions` ordered by id so the deduplicated table is visible end to end — it should have 7 rows.
+
+List the objects in the new schema so `transactions` is confirmed present, pull the detailed column/constraint metadata for `transactions` so I can see the PK and column types are recorded, and finish with a connection-scope database health check. Every DDL and DML must stay strictly inside `agenticmcpe_bench_ledger_scrub` — public stays untouched.

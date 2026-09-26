@@ -1,0 +1,13 @@
+{
+  "tool": "execute_sql",
+  "impl": [
+    {
+      "file": "src/postgres_mcp/server.py",
+      "func": "execute_sql",
+      "start_line": 415,
+      "end_line": 427,
+      "code": "async def execute_sql(\n    sql: str = Field(description=\"SQL to run\", default=\"all\"),\n) -> ResponseType:\n    \"\"\"Executes a SQL query against the database.\"\"\"\n    try:\n        sql_driver = await get_sql_driver()\n        rows = await sql_driver.execute_query(sql)  # type: ignore\n        if rows is None:\n            return format_text_response(\"No results\")\n        return format_text_response(list([r.cells for r in rows]))\n    except Exception as e:\n        logger.error(f\"Error executing query: {e}\")\n        return format_error_response(str(e))"
+    }
+  ],
+  "tests": []
+}

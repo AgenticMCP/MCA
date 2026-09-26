@@ -1,0 +1,1 @@
+List all schemas in this database, then show me which extensions are installed with their versions, and finally tell me the current database name, current user, and server version as a single three-column result with the columns named dbname, usr, and version.

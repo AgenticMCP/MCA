@@ -1,0 +1,5 @@
+Task Number: 25
+Task Name: playwright_paper_task_0006
+
+PROMPT:
+I am a first-year PhD student focusing on LLMs and I'm super excited to dive into this field! I would love to learn about the amazing three WizardLM works, including WizardLM, WizardMath and WizardCoder. Could you please help me find the arXiv IDs of these fantastic papers from https://arxiv.org/? I'd really appreciate it! Remember to close the browser when you finish the task.

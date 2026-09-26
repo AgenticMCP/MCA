@@ -1,0 +1,5 @@
+Task Number: 10
+Task Name: playwright_google_map_task_0006
+
+PROMPT:
+Hey there! As a dad who wants to create the most amazing adventure for my little ones, I'm planning the ultimate family road trip from Disneyland Paris to the 24 Hours of Le Mans Museum with my precious kids. You know how it is - we want to make sure everyone stays happy, fed, and comfortable during our journey! I need your fantastic help creating a driving route with 1 perfectly planned stop, using that incredible website `https://www.google.com/maps`. Could you please map out a route with exactly 1 intermediate point that's located right at the geographic mid point along our route (based on the route polyline)? For this stop, I need you to find locations (with names and Place IDs) that are either family-friendly restaurants, cozy hotels, or reliable gas stations - all with a minimum user rating of 4.2 because only the best will do for my family! This trip needs to be both super practical and absolutely memorable for all of us. Thanks in advance, and remember to close the browser when you're all done!

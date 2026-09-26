@@ -1,0 +1,21 @@
+Hey! I'm staging a tiny row-level migration and want a clean sandbox to demo it. Could you set me up a fresh schema called `agenticmcpe_bench_prioritystage_demo` and inside it do the following, all schema-qualified so `public` stays untouched?
+
+1) Build a source table `inbox_orders` with `id serial PRIMARY KEY`, `customer text`, `region text`, `total_cents integer`, and `status text`.
+2) Seed it with exactly these seven rows verbatim, in this order:
+   - (1, 'alice',  'east',  4500, 'completed')
+   - (2, 'bob',    'west',  1299, 'pending')
+   - (3, 'carol',  'east',  7800, 'completed')
+   - (4, 'dave',   'north', 2500, 'cancelled')
+   - (5, 'erin',   'south',  990, 'completed')
+   - (6, 'frank',  'west',  6200, 'pending')
+   - (7, 'grace',  'east',  3300, 'completed')
+3) Build a destination table `archived_orders` in the same schema with the same column shape (`id serial PRIMARY KEY`, `customer text`, `region text`, `total_cents integer`, `status text`). Leave it empty for now.
+4) Run ONE `INSERT INTO archived_orders (id, customer, region, total_cents, status) SELECT id, customer, region, total_cents, status FROM inbox_orders WHERE status = 'completed' ORDER BY id;` so the four completed rows (ids 1, 3, 5, 7) move over.
+5) Run `DELETE FROM inbox_orders WHERE status = 'completed';` so the source ends up holding only the non-completed rows.
+
+After the migration, please run three labeled reads so the outcome is provable:
+   - one prefixed `-- inbox_remaining` returning id, customer, status from `inbox_orders` ordered by id;
+   - one prefixed `-- archived_rows` returning id, customer, status from `archived_orders` ordered by id;
+   - one prefixed `-- row_count_delta` returning the COUNT(*) of each table side-by-side as (inbox_count, archived_count) so the move is visible numerically.
+
+Then list the objects in the new schema so both tables are confirmed present, and pull the detailed column/constraint metadata for `inbox_orders` and `archived_orders` so I can see the shapes match. Finish with a connection-scope database health check. Every DDL and DML must stay strictly inside `agenticmcpe_bench_prioritystage_demo` — please don't touch `public` or any other schema.

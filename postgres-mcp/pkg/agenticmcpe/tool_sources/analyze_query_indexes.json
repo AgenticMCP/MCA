@@ -1,0 +1,13 @@
+{
+  "tool": "analyze_query_indexes",
+  "impl": [
+    {
+      "file": "src/postgres_mcp/server.py",
+      "func": "analyze_query_indexes",
+      "start_line": 465,
+      "end_line": 487,
+      "code": "async def analyze_query_indexes(\n    queries: list[str] = Field(description=\"List of Query strings to analyze\"),\n    max_index_size_mb: int = Field(description=\"Max index size in MB\", default=10000),\n    method: Literal[\"dta\", \"llm\"] = Field(description=\"Method to use for analysis\", default=\"dta\"),\n) -> ResponseType:\n    \"\"\"Analyze a list of SQL queries and recommend optimal indexes.\"\"\"\n    if len(queries) == 0:\n        return format_error_response(\"Please provide a non-empty list of queries to analyze.\")\n    if len(queries) > MAX_NUM_INDEX_TUNING_QUERIES:\n        return format_error_response(f\"Please provide a list of up to {MAX_NUM_INDEX_TUNING_QUERIES} queries to analyze.\")\n\n    try:\n        sql_driver = await get_sql_driver()\n        if method == \"dta\":\n            index_tuning = DatabaseTuningAdvisor(sql_driver)\n        else:\n            index_tuning = LLMOptimizerTool(sql_driver)\n        dta_tool = TextPresentation(sql_driver, index_tuning)\n        result = await dta_tool.analyze_queries(queries=queries, max_index_size_mb=max_index_size_mb)\n        return format_text_response(result)\n    except Exception as e:\n        logger.error(f\"Error analyzing queries: {e}\")\n        return format_error_response(str(e))"
+    }
+  ],
+  "tests": []
+}

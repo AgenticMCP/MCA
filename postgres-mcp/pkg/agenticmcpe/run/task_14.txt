@@ -1,0 +1,15 @@
+Hey, I'm prototyping a small reporting slice and want to show what a Postgres materialized view refresh actually looks like end to end. Could you set me up a fresh schema called `agenticmcpe_bench_matviewpulse_demo` and inside it build a `support_tickets` table with `id serial PRIMARY KEY`, `product text`, `priority text`, `status text`, and `minutes_spent integer`. Then seed it with exactly these seven rows verbatim:
+
+- (1, 'billing', 'high', 'open', 45)
+- (2, 'billing', 'low', 'closed', 20)
+- (3, 'search', 'high', 'open', 60)
+- (4, 'search', 'medium', 'open', 30)
+- (5, 'search', 'high', 'closed', 15)
+- (6, 'mobile', 'medium', 'closed', 25)
+- (7, 'mobile', 'low', 'open', 10)
+
+Once that's in, please create a materialized view called `mv_support_totals` inside the same schema that aggregates `support_tickets` by `product` and `priority`, summing `minutes_spent` as `total_minutes` and counting `id` as `ticket_count`, ordered by `product` then `priority`. Run a labeled SELECT prefixed `-- before_refresh` against the materialized view so I can see the initial totals.
+
+Then insert one more verbatim row — (8, 'billing', 'high', 'open', 55) — into `support_tickets`, run `REFRESH MATERIALIZED VIEW mv_support_totals` so the aggregates pick it up, and follow that with a labeled SELECT prefixed `-- after_refresh` against the materialized view so I can see the refreshed totals side by side.
+
+After that, list the objects in the new schema so the table and materialized view are both visible, and pull the detailed column metadata for `mv_support_totals` so I can confirm its column shape and data types. Finish with a connection-scope database health check. Every DDL and DML must stay strictly inside `agenticmcpe_bench_matviewpulse_demo` — please don't touch `public`.

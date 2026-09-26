@@ -1,0 +1,5 @@
+Task Number: 3
+Task Name: playwright_booking_task_0003
+
+PROMPT:
+Help me find a round-trip flight from Heathrow to Charles de Gaulle Airport in Paris departing 30 days from now (if today is 2025-07-07, then the departure date is 2025-08-06). The trip duration should be 6 days (for example, if the departure date is 2025-07-20, then the return date is 2025-07-26). Use www.booking.com to find the cheapest direct economy flight. For the outbound flight, the departure time must be between 6:00 AM and 12:00 PM, and the arrival time must also be between 6:00 AM and 12:00 PM. For the return flight, the departure time must be between 12:00 PM and 6:00 PM, and the arrival time must be between 12:00 PM and 6:00 PM. I only need the price to decide whether to plan this trip. Remember to close the browser after you finish the task.

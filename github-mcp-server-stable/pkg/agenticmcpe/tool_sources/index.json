@@ -1,0 +1,704 @@
+{
+  "generated_at": "2026-09-16T10:28:54Z",
+  "source_commit": "",
+  "tools": {
+    "actions_get": {
+      "impl": [
+        "pkg/github/actions.go:408"
+      ],
+      "tests": [
+        "pkg/github/actions_test.go:248"
+      ]
+    },
+    "actions_list": {
+      "impl": [
+        "pkg/github/actions.go:201"
+      ],
+      "tests": [
+        "pkg/github/actions_test.go:19"
+      ]
+    },
+    "actions_run_trigger": {
+      "impl": [
+        "pkg/github/actions.go:530"
+      ],
+      "tests": [
+        "pkg/github/actions_test.go:354"
+      ]
+    },
+    "add_comment_to_pending_review": {
+      "impl": [
+        "pkg/github/pullrequests.go:2280"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:3490"
+      ]
+    },
+    "add_issue_comment": {
+      "impl": [
+        "pkg/github/issues.go:1189"
+      ],
+      "tests": [
+        "pkg/github/issues_test.go:4741"
+      ]
+    },
+    "add_reply_to_pull_request_comment": {
+      "impl": [
+        "pkg/github/pullrequests.go:1182"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:4178"
+      ]
+    },
+    "assign_copilot_to_issue": {
+      "impl": [
+        "pkg/github/copilot.go:154"
+      ],
+      "tests": [
+        "pkg/github/copilot_test.go:21"
+      ]
+    },
+    "assign_copilot_to_issue_with_intent": {
+      "impl": [
+        "pkg/github/copilot.go:502"
+      ],
+      "tests": [
+        "pkg/github/copilot_test.go:966"
+      ]
+    },
+    "create_branch": {
+      "impl": [
+        "pkg/github/repositories.go:1237"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:963"
+      ]
+    },
+    "create_gist": {
+      "impl": [
+        "pkg/github/gists.go:171"
+      ],
+      "tests": [
+        "pkg/github/gists_test.go:294"
+      ]
+    },
+    "create_or_update_file": {
+      "impl": [
+        "pkg/github/repositories.go:405"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:1685"
+      ]
+    },
+    "create_pull_request": {
+      "impl": [
+        "pkg/github/pullrequests.go:655"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:2647"
+      ]
+    },
+    "create_repository": {
+      "impl": [
+        "pkg/github/repositories.go:601"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:2051"
+      ]
+    },
+    "delete_file": {
+      "impl": [
+        "pkg/github/repositories.go:1052"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:3105"
+      ]
+    },
+    "discussion_comment_write": {
+      "impl": [
+        "pkg/github/discussions.go:601"
+      ],
+      "tests": [
+        "pkg/github/discussions_test.go:933"
+      ]
+    },
+    "dismiss_notification": {
+      "impl": [
+        "pkg/github/notifications.go:166"
+      ],
+      "tests": [
+        "pkg/github/notifications_test.go:437"
+      ]
+    },
+    "fork_repository": {
+      "impl": [
+        "pkg/github/repositories.go:953"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:861"
+      ]
+    },
+    "get_code_quality_finding": {
+      "impl": [
+        "pkg/github/code_quality.go:20"
+      ],
+      "tests": [
+        "pkg/github/code_quality_test.go:18"
+      ]
+    },
+    "get_code_scanning_alert": {
+      "impl": [
+        "pkg/github/code_scanning.go:20"
+      ],
+      "tests": [
+        "pkg/github/code_scanning_test.go:17"
+      ]
+    },
+    "get_commit": {
+      "impl": [
+        "pkg/github/repositories.go:27"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:1140"
+      ]
+    },
+    "get_dependabot_alert": {
+      "impl": [
+        "pkg/github/dependabot.go:21"
+      ],
+      "tests": [
+        "pkg/github/dependabot_test.go:16"
+      ]
+    },
+    "get_discussion": {
+      "impl": [
+        "pkg/github/discussions.go:285"
+      ],
+      "tests": [
+        "pkg/github/discussions_test.go:496"
+      ]
+    },
+    "get_discussion_comments": {
+      "impl": [
+        "pkg/github/discussions.go:393"
+      ],
+      "tests": [
+        "pkg/github/discussions_test.go:637"
+      ]
+    },
+    "get_file_contents": {
+      "impl": [
+        "pkg/github/repositories.go:723"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:26",
+        "pkg/github/repositories_test.go:547"
+      ]
+    },
+    "get_gist": {
+      "impl": [
+        "pkg/github/gists.go:111"
+      ],
+      "tests": [
+        "pkg/github/gists_test.go:186"
+      ]
+    },
+    "get_global_security_advisory": {
+      "impl": [
+        "pkg/github/security_advisories.go:331"
+      ],
+      "tests": [
+        "pkg/github/security_advisories_test.go:133"
+      ]
+    },
+    "get_job_logs": {
+      "impl": [
+        "pkg/github/actions.go:647"
+      ],
+      "tests": [
+        "pkg/github/actions_test.go:569"
+      ]
+    },
+    "get_label": {
+      "impl": [
+        "pkg/github/labels.go:26"
+      ],
+      "tests": [
+        "pkg/github/labels_test.go:16",
+        "pkg/github/tools_validation_test.go:106"
+      ]
+    },
+    "get_latest_release": {
+      "impl": [
+        "pkg/github/repositories.go:1912"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:3722"
+      ]
+    },
+    "get_me": {
+      "impl": [
+        "pkg/github/context_tools.go:45"
+      ],
+      "tests": [
+        "pkg/github/context_tools_test.go:19",
+        "pkg/github/server_test.go:374"
+      ]
+    },
+    "get_notification_details": {
+      "impl": [
+        "pkg/github/notifications.go:334"
+      ],
+      "tests": [
+        "pkg/github/notifications_test.go:662"
+      ]
+    },
+    "get_release_by_tag": {
+      "impl": [
+        "pkg/github/repositories.go:1986"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:3811"
+      ]
+    },
+    "get_repository_tree": {
+      "impl": [
+        "pkg/github/git.go:43"
+      ],
+      "tests": [
+        "pkg/github/git_test.go:18"
+      ]
+    },
+    "get_secret_scanning_alert": {
+      "impl": [
+        "pkg/github/secret_scanning.go:21"
+      ],
+      "tests": [
+        "pkg/github/secret_scanning_test.go:17"
+      ]
+    },
+    "get_tag": {
+      "impl": [
+        "pkg/github/repositories.go:1676"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:3419"
+      ]
+    },
+    "get_team_members": {
+      "impl": [
+        "pkg/github/context_tools.go:229"
+      ],
+      "tests": [
+        "pkg/github/context_tools_test.go:451"
+      ]
+    },
+    "get_teams": {
+      "impl": [
+        "pkg/github/context_tools.go:126"
+      ],
+      "tests": [
+        "pkg/github/context_tools_test.go:208"
+      ]
+    },
+    "issue_read": {
+      "impl": [
+        "pkg/github/issues.go:610"
+      ],
+      "tests": [
+        "pkg/github/issues_test.go:123",
+        "pkg/github/issues_test.go:3829"
+      ]
+    },
+    "issue_write": {
+      "impl": [
+        "pkg/github/issues.go:2176"
+      ],
+      "tests": [
+        "pkg/github/issues_test.go:1673",
+        "pkg/github/issues_test.go:3130"
+      ]
+    },
+    "label_write": {
+      "impl": [
+        "pkg/github/labels.go:230"
+      ],
+      "tests": [
+        "pkg/github/labels_test.go:241"
+      ]
+    },
+    "list_branches": {
+      "impl": [
+        "pkg/github/repositories.go:313"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:2987"
+      ]
+    },
+    "list_code_scanning_alerts": {
+      "impl": [
+        "pkg/github/code_scanning.go:102"
+      ],
+      "tests": [
+        "pkg/github/code_scanning_test.go:123"
+      ]
+    },
+    "list_commits": {
+      "impl": [
+        "pkg/github/repositories.go:137"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:1383",
+        "pkg/github/fields_filtering_test.go:64"
+      ]
+    },
+    "list_dependabot_alerts": {
+      "impl": [
+        "pkg/github/dependabot.go:103"
+      ],
+      "tests": [
+        "pkg/github/dependabot_test.go:128"
+      ]
+    },
+    "list_discussion_categories": {
+      "impl": [
+        "pkg/github/discussions.go:1004"
+      ],
+      "tests": [
+        "pkg/github/discussions_test.go:788"
+      ]
+    },
+    "list_discussions": {
+      "impl": [
+        "pkg/github/discussions.go:128"
+      ],
+      "tests": [
+        "pkg/github/discussions_test.go:215",
+        "pkg/github/csv_output_test.go:61"
+      ]
+    },
+    "list_gists": {
+      "impl": [
+        "pkg/github/gists.go:22"
+      ],
+      "tests": [
+        "pkg/github/gists_test.go:18"
+      ]
+    },
+    "list_global_security_advisories": {
+      "impl": [
+        "pkg/github/security_advisories.go:21"
+      ],
+      "tests": [
+        "pkg/github/security_advisories_test.go:18"
+      ]
+    },
+    "list_issue_fields": {
+      "impl": [
+        "pkg/github/issue_fields.go:107"
+      ],
+      "tests": [
+        "pkg/github/issue_fields_test.go:17"
+      ]
+    },
+    "list_issue_types": {
+      "impl": [
+        "pkg/github/issues.go:1087"
+      ],
+      "tests": [
+        "pkg/github/issues_test.go:5463"
+      ]
+    },
+    "list_issues": {
+      "impl": [
+        "pkg/github/issues.go:2759"
+      ],
+      "tests": [
+        "pkg/github/issues_test.go:2144",
+        "pkg/github/fields_filtering_test.go:356"
+      ]
+    },
+    "list_label": {
+      "impl": [
+        "pkg/github/labels.go:132"
+      ],
+      "tests": [
+        "pkg/github/labels_test.go:141"
+      ]
+    },
+    "list_notifications": {
+      "impl": [
+        "pkg/github/notifications.go:29"
+      ],
+      "tests": [
+        "pkg/github/notifications_test.go:17"
+      ]
+    },
+    "list_org_repository_security_advisories": {
+      "impl": [
+        "pkg/github/security_advisories.go:392"
+      ],
+      "tests": [
+        "pkg/github/security_advisories_test.go:500"
+      ]
+    },
+    "list_pull_requests": {
+      "impl": [
+        "pkg/github/pullrequests.go:1333"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:614",
+        "pkg/github/fields_filtering_test.go:171"
+      ]
+    },
+    "list_releases": {
+      "impl": [
+        "pkg/github/repositories.go:1789"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:3622",
+        "pkg/github/fields_filtering_test.go:117"
+      ]
+    },
+    "list_repository_collaborators": {
+      "impl": [
+        "pkg/github/repositories.go:2767"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:5513"
+      ]
+    },
+    "list_repository_security_advisories": {
+      "impl": [
+        "pkg/github/security_advisories.go:217"
+      ],
+      "tests": [
+        "pkg/github/security_advisories_test.go:239"
+      ]
+    },
+    "list_secret_scanning_alerts": {
+      "impl": [
+        "pkg/github/secret_scanning.go:103"
+      ],
+      "tests": [
+        "pkg/github/secret_scanning_test.go:121"
+      ]
+    },
+    "list_starred_repositories": {
+      "impl": [
+        "pkg/github/repositories.go:2073"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:4505"
+      ]
+    },
+    "list_tags": {
+      "impl": [
+        "pkg/github/repositories.go:1585"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:3289"
+      ]
+    },
+    "manage_notification_subscription": {
+      "impl": [
+        "pkg/github/notifications.go:409"
+      ],
+      "tests": [
+        "pkg/github/notifications_test.go:141"
+      ]
+    },
+    "manage_repository_notification_subscription": {
+      "impl": [
+        "pkg/github/notifications.go:505"
+      ],
+      "tests": [
+        "pkg/github/notifications_test.go:277"
+      ]
+    },
+    "mark_all_notifications_read": {
+      "impl": [
+        "pkg/github/notifications.go:242"
+      ],
+      "tests": [
+        "pkg/github/notifications_test.go:565"
+      ]
+    },
+    "merge_pull_request": {
+      "impl": [
+        "pkg/github/pullrequests.go:1508"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:748"
+      ]
+    },
+    "projects_get": {
+      "impl": [
+        "pkg/github/projects.go:450"
+      ],
+      "tests": [
+        "pkg/github/projects_test.go:588"
+      ]
+    },
+    "projects_list": {
+      "impl": [
+        "pkg/github/projects.go:285"
+      ],
+      "tests": [
+        "pkg/github/projects_test.go:25"
+      ]
+    },
+    "projects_write": {
+      "impl": [
+        "pkg/github/projects.go:729"
+      ],
+      "tests": [
+        "pkg/github/projects_test.go:871"
+      ]
+    },
+    "pull_request_read": {
+      "impl": [
+        "pkg/github/pullrequests.go:27"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:22",
+        "pkg/github/pullrequests_test.go:1150"
+      ]
+    },
+    "pull_request_review_write": {
+      "impl": [
+        "pkg/github/pullrequests.go:1794"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:3039",
+        "pkg/github/pullrequests_test.go:3298"
+      ]
+    },
+    "push_files": {
+      "impl": [
+        "pkg/github/repositories.go:1350"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:2241"
+      ]
+    },
+    "request_copilot_review": {
+      "impl": [
+        "pkg/github/copilot.go:837"
+      ],
+      "tests": [
+        "pkg/github/copilot_test.go:854"
+      ]
+    },
+    "search_code": {
+      "impl": [
+        "pkg/github/search.go:195"
+      ],
+      "tests": [
+        "pkg/github/search_test.go:341",
+        "pkg/github/fields_telemetry_test.go:81"
+      ]
+    },
+    "search_commits": {
+      "impl": [
+        "pkg/github/search.go:527"
+      ],
+      "tests": [
+        "pkg/github/search_test.go:985"
+      ]
+    },
+    "search_issues": {
+      "impl": [
+        "pkg/github/issues.go:1627"
+      ],
+      "tests": [
+        "pkg/github/issues_test.go:1055",
+        "pkg/github/fields_filtering_test.go:258"
+      ]
+    },
+    "search_orgs": {
+      "impl": [
+        "pkg/github/search.go:485"
+      ],
+      "tests": [
+        "pkg/github/search_test.go:825"
+      ]
+    },
+    "search_pull_requests": {
+      "impl": [
+        "pkg/github/pullrequests.go:1617"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:862",
+        "pkg/github/fields_filtering_test.go:225"
+      ]
+    },
+    "search_repositories": {
+      "impl": [
+        "pkg/github/search.go:22"
+      ],
+      "tests": [
+        "pkg/github/search_test.go:18"
+      ]
+    },
+    "search_users": {
+      "impl": [
+        "pkg/github/search.go:443"
+      ],
+      "tests": [
+        "pkg/github/search_test.go:639"
+      ]
+    },
+    "star_repository": {
+      "impl": [
+        "pkg/github/repositories.go:2217"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:4667"
+      ]
+    },
+    "sub_issue_write": {
+      "impl": [
+        "pkg/github/issues.go:1385"
+      ],
+      "tests": [
+        "pkg/github/issues_test.go:4282",
+        "pkg/github/issues_test.go:4997"
+      ]
+    },
+    "unstar_repository": {
+      "impl": [
+        "pkg/github/repositories.go:2283"
+      ],
+      "tests": [
+        "pkg/github/repositories_test.go:4758"
+      ]
+    },
+    "update_gist": {
+      "impl": [
+        "pkg/github/gists.go:273"
+      ],
+      "tests": [
+        "pkg/github/gists_test.go:432"
+      ]
+    },
+    "update_pull_request": {
+      "impl": [
+        "pkg/github/pullrequests.go:865"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:183"
+      ]
+    },
+    "update_pull_request_branch": {
+      "impl": [
+        "pkg/github/pullrequests.go:1689"
+      ],
+      "tests": [
+        "pkg/github/pullrequests_test.go:1935"
+      ]
+    }
+  },
+  "missing_impl": [],
+  "missing_tests": []
+}

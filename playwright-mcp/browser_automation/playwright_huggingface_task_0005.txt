@@ -1,0 +1,5 @@
+Task Number: 16
+Task Name: playwright_huggingface_task_0005
+
+PROMPT:
+As a student exploring GUI Agents, I came across an interesting blog post about GUI grounding on the HuggingFace website (https://huggingface.co/). The research project is called Grounding-R1, and I noticed their 7B model achieved 50.1 on ScreenSpot-Pro. For my studies, I need to find out what the first affiliation of this research work is. Please help me locate this information and remember to close the browser when you finish the task.

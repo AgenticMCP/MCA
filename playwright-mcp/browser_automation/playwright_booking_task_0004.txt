@@ -1,0 +1,5 @@
+Task Number: 4
+Task Name: playwright_booking_task_0004
+
+PROMPT:
+I will travel to Singapore 3 days from now (If today is 2025-06-07, then 3 days later will be 2025-06-10). I want to go to Universal Studios and Cove Waterpark. Could you tell me the total price for two adult tickets and one child ticket on the official website of Sentosa (https://www.rwsentosa.com/)? I only want to see the price. Remember to close the browser after you finish the task.

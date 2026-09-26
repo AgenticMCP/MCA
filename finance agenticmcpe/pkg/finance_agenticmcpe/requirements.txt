@@ -1,0 +1,11 @@
+# Runtime dependencies for pkg.finance_agenticmcpe
+#
+# The agentic workflow itself depends only on the Anthropic SDK and the
+# bundled finance_mcp_wrapper. yfinance (the server-side dependency)
+# ships under servers/yahoo_finance/ and is NOT pulled in here — this
+# package is the consumer.
+anthropic>=0.30.0
+
+# Optional: pytest for running the in-package idem_selftest offline
+# harness (idempotency-equivalent regression tests against a fake client).
+pytest>=8.0.0; extra == "test"

@@ -1,0 +1,5 @@
+Task Number: 5
+Task Name: playwright_google_map_task_0001
+
+PROMPT:
+I'm from Spain and plant to visit Indonesia. Help me plan an amazing road trip starting in 'Jakarta' and ending in 'Surabaya', and I'd love your help to make it perfect with the amazing website `https://www.google.com/maps`! My plan is to drive through exactly 3 interesting cities between the start and end points. Could you please map out exactly 3 distinct driving route options for this journey? For these routes, could you also identify 2 convenient rest stops within those intermediate cities for each route (a total of 2 rest stops per route)? Additionally, I would love to catch some scenery, so could you please find exactly 2 scenic viewpoints within those intermediate cities per route (the cities of the viewpoints should be at least 1 city different from the cities of the rest stops per route), and tell me their elevations (a total of 2 scenic viewpoints per route)? Oh, I must visit 'Yogyakarta' to enjoy the classical Javanese dance. Really looking forward to seeing the options for this fantastic adventure! Remember to close the browser after you finish the task.

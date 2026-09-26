@@ -1,0 +1,23 @@
+Hey, I'm doing a small schema refactor and want a clean sandbox to demo normalising a wide denormalised table into a proper parent/child pair without losing any rows. Could you set me up a fresh schema called `agenticmcpe_bench_invoiceroute_split` and inside it run the whole drill end-to-end?
+
+Step 1 — Build a wide source table `order_lines_wide` with `order_id int`, `customer text`, `region text`, `sku text`, `product_name text`, `qty int`, and `unit_price_cents int`. Seed it with exactly these six rows verbatim, in this order:
+   - (1, 'alice',  'east', 'SKU-A', 'widget',   2, 450)
+   - (1, 'alice',  'east', 'SKU-B', 'sprocket', 1, 199)
+   - (2, 'bob',    'west', 'SKU-A', 'widget',   5, 450)
+   - (3, 'carol',  'east', 'SKU-C', 'gizmo',    3, 999)
+   - (3, 'carol',  'east', 'SKU-B', 'sprocket', 2, 199)
+   - (4, 'dave',   'north','SKU-D', 'doodad',   1, 275)
+
+Step 2 — Build a parent table `orders` with `id serial PRIMARY KEY`, `customer text`, and `region text`. Populate it from the wide table using a single `INSERT INTO orders (id, customer, region) SELECT DISTINCT order_id, customer, region FROM order_lines_wide ORDER BY order_id;` so order ids 1, 2, 3, 4 end up there.
+
+Step 3 — Build a child table `order_items` with `id serial PRIMARY KEY`, `order_id int` (with a `FOREIGN KEY (order_id) REFERENCES orders(id)` constraint), `sku text`, `product_name text`, `qty int`, and `unit_price_cents int`. Populate it with one `INSERT INTO order_items (id, order_id, sku, product_name, qty, unit_price_cents) SELECT row_number() OVER (ORDER BY order_id, sku), order_id, sku, product_name, qty, unit_price_cents FROM order_lines_wide ORDER BY order_id, sku;` so all six rows move across with the FK wired correctly.
+
+Step 4 — Verify with three labeled reads: `-- parent_count` returning the scalar COUNT(*) from `orders`, `-- child_count` returning the scalar COUNT(*) from `order_items`, and `-- child_fk_proof` returning one row from `information_schema.table_constraints` joined with `referential_constraints` filtered to the new schema and `orders`, projecting `table_name`, `constraint_name`, and `unique_constraint_name` so the FK is on record. The expectation is parent_count = 4 and child_count = 6.
+
+Step 5 — Drop the obsolete wide table with `DROP TABLE order_lines_wide;`.
+
+Step 6 — List the objects in the new schema so I can see only `orders` and `order_items` remain.
+
+Step 7 — Finish with a connection-scope database health check so any planner / vacuum / long-tx warnings get surfaced before I sign off.
+
+Strict rule: every DDL and DML stays strictly inside `agenticmcpe_bench_invoiceroute_split` — please don't touch `public` or any other schema.

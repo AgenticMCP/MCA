@@ -1,0 +1,14 @@
+Hey, I'd love a tiny playground to demo parent/child table relationships — basically a departments table with an employees child that has a REFERENCES foreign key pointing back. Could you set up a fresh schema called `agenticmcpe_bench_dispatchgraph_kiosk` and inside it create two tables:
+
+  - `departments` with `id serial PRIMARY KEY` and `dept_name text`
+  - `employees` with `id serial PRIMARY KEY`, `full_name text`, `dept_id int`, and a `FOREIGN KEY (dept_id) REFERENCES departments(id)` constraint
+
+Then seed departments with these four rows verbatim: (1, 'engineering'), (2, 'sales'), (3, 'support'), (4, 'finance'). And seed employees with these eight rows verbatim: (1, 'amy', 1), (2, 'ben', 1), (3, 'cara', 2), (4, 'dan', 2), (5, 'erin', 3), (6, 'fae', 3), (7, 'gus', 4), (8, 'hal', NULL). The NULL dept_id on hal is intentional — FK columns allow NULL by default.
+
+After the inserts, please run two labeled SELECTs against the join:
+  - one prefixed `-- employees_per_department` returning dept_name and COUNT(*) AS employee_count from the join of employees to departments, grouped by dept_name and ordered by dept_name, so I can see how many kids each parent has;
+  - one prefixed `-- employees_with_dept` returning emp_id (the employees.id), full_name, and dept_name from the same join, ordered by dept_name then emp_id, so the parent/child pairing is visible row by row.
+
+Then list the schema's objects so I can see both tables are there, and pull the detailed column/constraint metadata for `employees` — I want to confirm the FOREIGN KEY shows up in the constraints list. As a final confirmation, run a SELECT from information_schema.table_constraints (joined with referential_constraints / key_column_usage as needed) filtered to the new schema that returns one row proving the FK is recorded, showing the table_name, constraint_name, constraint_type='FOREIGN KEY', and the referenced table.
+
+Finish with a connection-scope database health check so any other issues get surfaced. Keep every DDL and DML strictly inside `agenticmcpe_bench_dispatchgraph_kiosk` — public stays untouched.

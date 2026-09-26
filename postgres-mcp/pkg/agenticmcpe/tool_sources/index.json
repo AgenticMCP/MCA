@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-08-04T16:40:28Z",
+  "source_commit": "",
+  "tools": {
+    "analyze_db_health": {
+      "impl": [
+        "src/postgres_mcp/server.py:506"
+      ],
+      "tests": []
+    },
+    "analyze_query_indexes": {
+      "impl": [
+        "src/postgres_mcp/server.py:465"
+      ],
+      "tests": []
+    },
+    "analyze_workload_indexes": {
+      "impl": [
+        "src/postgres_mcp/server.py:438"
+      ],
+      "tests": []
+    },
+    "execute_sql": {
+      "impl": [
+        "src/postgres_mcp/server.py:415"
+      ],
+      "tests": []
+    },
+    "explain_query": {
+      "impl": [
+        "src/postgres_mcp/server.py:336"
+      ],
+      "tests": [
+        "tests/unit/explain/test_server.py:37",
+        "tests/unit/explain/test_server.py:58"
+      ]
+    },
+    "get_object_details": {
+      "impl": [
+        "src/postgres_mcp/server.py:197"
+      ],
+      "tests": []
+    },
+    "get_top_queries": {
+      "impl": [
+        "src/postgres_mcp/server.py:531"
+      ],
+      "tests": [
+        "tests/integration/test_top_queries_integration.py:109",
+        "tests/integration/test_top_queries_integration.py:151"
+      ]
+    },
+    "list_objects": {
+      "impl": [
+        "src/postgres_mcp/server.py:123"
+      ],
+      "tests": []
+    },
+    "list_schemas": {
+      "impl": [
+        "src/postgres_mcp/server.py:91"
+      ],
+      "tests": []
+    }
+  },
+  "missing_impl": [],
+  "missing_tests": [
+    "analyze_db_health",
+    "analyze_query_indexes",
+    "analyze_workload_indexes",
+    "execute_sql",
+    "get_object_details",
+    "list_objects",
+    "list_schemas"
+  ]
+}

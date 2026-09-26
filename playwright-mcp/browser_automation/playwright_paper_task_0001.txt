@@ -1,0 +1,5 @@
+Task Number: 20
+Task Name: playwright_paper_task_0001
+
+PROMPT:
+I am a first-year PhD student focusing on Large Multimodal Models. My supervisor asked me to survey recent papers on this topic. Since ICLR 2025 is a top conference, I want to collect all main-track papers accepted there that include 'Large Multimodal Models' in their titles. Please ignore other tracks such as the blog track. Find these papers on the official ICLR website (https://iclr.cc/), then obtain their arXiv IDs from https://arxiv.org/. Remember to close the browser when you finish the task.

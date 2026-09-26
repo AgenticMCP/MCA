@@ -1,0 +1,20 @@
+I'm staging a little schema migration and want a tidy sandbox to demo a schema-qualified ENUM type plus a DOMAIN, so I can show a teammate how a column can be constrained in two different ways in one table. Could you set up a fresh schema called `agenticmcpe_bench_prioritystage_demo` and inside it do the following, all schema-qualified so public stays untouched?
+
+1) Define an ENUM type called `stage_label` with exactly four members, in this order: 'triage', 'in_progress', 'awaiting_review', 'closed'.
+2) Define a DOMAIN called `sla_hours` as an integer with a CHECK requiring the value to be between 1 and 72 inclusive.
+3) Build a table called `work_items` with `id serial PRIMARY KEY`, `ticket text`, `opened_on date`, `stage stage_label` (using the enum above), `severity text` (with a CHECK constraint enforcing the values 'low','medium','high','critical'), and `sla_hours sla_hours` (typed as the domain above).
+4) Insert exactly these six rows verbatim in this order, exercising every enum member at least once:
+   - (default id, 'T-001', '2025-04-01', 'triage',         'high',     4)
+   - (default id, 'T-002', '2025-04-02', 'in_progress',    'medium',  24)
+   - (default id, 'T-003', '2025-04-03', 'awaiting_review','critical',48)
+   - (default id, 'T-004', '2025-04-04', 'triage',         'low',      2)
+   - (default id, 'T-005', '2025-04-05', 'closed',         'high',     8)
+   - (default id, 'T-006', '2025-04-06', 'closed',         'medium',  72)
+
+After the inserts, please list the objects in the new schema (I want to see the enum, domain, and table all present), and pull the detailed metadata for the `stage_label` enum and the `sla_hours` domain so the type definitions are inspectable. Then pull the detailed column/constraint metadata for `work_items` so I can confirm `stage` is typed as the enum, `sla_hours` is typed as the domain, and the CHECK on `severity` is registered.
+
+Then run two labeled reads against `work_items`:
+   - one prefixed `-- stage_distribution` returning stage_label and COUNT(*) AS ticket_count grouped by stage_label ordered by stage_label (the enum sort order should match the definition order);
+   - one prefixed `-- sla_hours_summary` returning MIN(sla_hours) AS min_sla, MAX(sla_hours) AS max_sla, COUNT(*) AS row_count over the whole table so I can see the domain-bounded values are all within 1..72.
+
+Finish with a connection-scope database health check so any planner / vacuum / long-tx warnings are surfaced before I call the demo done. Strict rule: every DDL and DML stays inside `agenticmcpe_bench_prioritystage_demo`. Please don't touch `public` or any other schema.

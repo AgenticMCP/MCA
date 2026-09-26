@@ -1,0 +1,5 @@
+Task Number: 28
+Task Name: playwright_sports_task_0001
+
+PROMPT:
+I am a big fan of Lakers in NBA. Can you help me find 3P% of Bronny James and Markieff Morris in 2024-2025 season? You can find it with the offical website of NBA (https://www.nba.com/). Remember to close the browser when you finish the task.

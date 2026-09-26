@@ -1,0 +1,8 @@
+I am a first-year PhD student in Computer Science. My supervisor has assigned me a project to build a code large language model fine-tuning framework. He wants the project to be called 'BigCodeLLM-FT-Proj'. To finish this project, I also want to invite my friend to join me as a collaborator, so I need three branches: main, dev-me, and dev-friend. I need to create a README.md file in the main branch with the content "# BigCodeLLM-FT-Proj
+
+A comprehensive framework for fine-tuning large language models.". I also need to create a .gitignore file in the main branch with the exact content: "# Python cache and virtual environments
+__pycache__/
+*.pyc
+*.py.class
+venv/
+*.env". In my dev branch, I want to copy the entire content of example_instructions.py from meta-llama's official codellama repository and give it the same name. I also want in my friend's branch to help me copy the entire content of generation.py from meta-llama's official codellama repository and give it the same name. Finally, create a pull request to merge my branch into main with the title "Add example instructions" and description "This PR adds the example instructions for the fine-tuning framework."
